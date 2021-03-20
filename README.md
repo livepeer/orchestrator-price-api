@@ -12,7 +12,7 @@ An API for curating the off-chain orchestrator pricing information and exposing 
 
 * Create a file ```.env``` and set environment variables (sample present in ```livepeer-pricing-tool-api/.env.sample```)
 * Run your docker daemon.
-* Build the docker image: ```docker build --tag api:latest``` .
+* Build the docker image: ```docker build --tag api:latest .``` .
 * Run Demux: ```docker run -v "$(pwd)"/data:/data -p 9000:9000 --env-file ./.env api:latest```
 
 <br>
