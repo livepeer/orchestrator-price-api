@@ -6,7 +6,7 @@ An API for curating the off-chain orchestrator pricing information and exposing 
 
 ## Getting Started
 
-* Clone the repo: ```git clone https://github.com/buidl-labs/livepeer-pricing-tool-api``` 
+* Clone the repo: ```git clone https://github.com/buidl-labs/livepeer-pricing-tool-api``` and ```cd``` into it. 
 
 ### Using Docker
 
