@@ -10,7 +10,7 @@ RUN go build -o pricing_api cmd/main.go
 
 FROM golang:1.16-alpine AS runtime
 WORKDIR /root
-COPY --from=builder /api/pricing_api /root/
+COPY --from=builder /api/pricing_api /usr/bin/
 
 ENV PORT=${PORT}
 ENV DB_PATH=${DB_PATH}
@@ -20,4 +20,4 @@ ENV POLL_INTERVAL=${POLL_INTERVAL}
 
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "/root/pricing_api" ]
+ENTRYPOINT [ "/usr/bin/pricing_api" ]
