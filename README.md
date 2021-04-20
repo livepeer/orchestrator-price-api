@@ -1,4 +1,4 @@
-# Livepeer Pricing Tool - API Documentation
+# Livepeer Price API - API Documentation
 
 An API for curating the off-chain orchestrator pricing information and exposing the data via various endpoints.
 
@@ -6,7 +6,7 @@ An API for curating the off-chain orchestrator pricing information and exposing 
 
 ## Getting Started
 
-* Clone the repo: ```git clone https://github.com/buidl-labs/livepeer-pricing-tool-api``` and ```cd``` into it. 
+* Clone the repo: ```git clone https://github.com/livepeer/orchestrator-price-api``` and ```cd``` into it. 
 
 ### Using Docker
 
@@ -43,8 +43,8 @@ GET request returning an object array consisting of latest statistics for all th
 #### Examples
 
 - Request
-    - [https://livepeer-pricing-tool.com/orchestratorStats](https://livepeer-pricing-tool.com/orchestratorStats)
-    - [https://livepeer-pricing-tool.com/orchestratorStats?excludeUnavailable=False](https://livepeer-pricing-tool.com/orchestratorStats?excludeUnavailable=False)
+    - [https://nyc.livepeer.com/orchestratorStats](https://nyc.livepeer.com/orchestratorStats)
+    - [https://nyc.livepeer.com/orchestratorStats?excludeUnavailable=False](https://nyc.livepeer.com/orchestratorStats?excludeUnavailable=False)
 
 
 - Response
@@ -122,9 +122,9 @@ GET request returning the price history corresponding to an orchestrator in the 
 #### Examples
 
 - Request
-    - [https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9)
-    - [https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?limit=10&offset=20](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?limit=10&offset=20)
-    - [https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?from=1616218200&till=1616563800](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?from=1616218200&till=1616563800)
+    - [https://nyc.livepeer.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9)
+    - [https://nyc.livepeer.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?limit=10&offset=20](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?limit=10&offset=20)
+    - [https://nyc.livepeer.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?from=1616218200&till=1616563800](https://livepeer-pricing-tool.com/priceHistory/0xda43d85b8d419a9c51bbf0089c9bd5169c23f2f9?from=1616218200&till=1616563800)
 
 
 - Response
