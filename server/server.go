@@ -78,11 +78,8 @@ func GetOrchestratorStats(w http.ResponseWriter, req *http.Request) {
 	dborchs, err := dataservice.FetchOrchestratorStatistics(excludeUnavailable)
 	if err != nil {
 		log.Errorln("Error fetching orchestrator statistics:", err.Error())
-
 		errResp := map[string]interface{}{"errors": []string{err.Error()}}
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(errResp)
+		writeJson(w, http.StatusInternalServerError, errResp)
 		return
 	}
 	data := []model.APIOrchestrator{}
@@ -90,8 +87,7 @@ func GetOrchestratorStats(w http.ResponseWriter, req *http.Request) {
 		data = append(data, reformatOrchestrator(x))
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+	writeJson(w, http.StatusOK, data)
 }
 
 // API endpoint handler for /priceHistory/{address}
@@ -126,9 +122,15 @@ func GetOrchestratorPriceHistory(w http.ResponseWriter, req *http.Request) {
 	for _, x := range dbphs {
 		data = append(data, reformatPriceHistory(x))
 	}
+	writeJson(w, http.StatusOK, data)
+}
 
+func writeJson(w http.ResponseWriter, status int, body interface{}) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+	w.WriteHeader(status)
+	if err := json.NewEncoder(w).Encode(body); err != nil {
+		log.Errorln("Error writing JSON response:", err.Error())
+	}
 }
 
 // Starts the server on port number passed as serverPort
