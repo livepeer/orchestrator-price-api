@@ -78,8 +78,7 @@ func GetOrchestratorStats(w http.ResponseWriter, req *http.Request) {
 	dborchs, err := dataservice.FetchOrchestratorStatistics(excludeUnavailable)
 	if err != nil {
 		log.Errorln("Error fetching orchestrator statistics:", err.Error())
-		errResp := map[string]interface{}{"errors": []string{err.Error()}}
-		writeJson(w, http.StatusInternalServerError, errResp)
+		writeJson(w, http.StatusInternalServerError, model.NewErrorResponse(err))
 		return
 	}
 	data := []model.APIOrchestrator{}
