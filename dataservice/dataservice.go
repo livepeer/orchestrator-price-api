@@ -2,6 +2,7 @@ package dataservice
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"os"
 	"time"
@@ -28,17 +29,17 @@ func DBInit() {
 
 	statement, err := database.Prepare(`
 		CREATE TABLE IF NOT EXISTS Orchestrators (
-			Address TEXT PRIMARY KEY, 
-			ServiceURI TEXT, 
-			LastRewardRound INTEGER, 
-			RewardCut INTEGER, 
-			FeeShare INTEGER, 
-			DelegatedState TEXT, 
-			ActivationRound INTEGER, 
-			DeactivationRound TEXT, 
-			Active INTEGER, 
-			Status TEXT, 
-			PricePerPixel STRING, 
+			Address TEXT PRIMARY KEY,
+			ServiceURI TEXT,
+			LastRewardRound INTEGER,
+			RewardCut INTEGER,
+			FeeShare INTEGER,
+			DelegatedState TEXT,
+			ActivationRound INTEGER,
+			DeactivationRound TEXT,
+			Active INTEGER,
+			Status TEXT,
+			PricePerPixel STRING,
 			UpdatedAt INTEGER
 		)
 	`)
@@ -52,8 +53,8 @@ func DBInit() {
 
 	statement, err = database.Prepare(`
 		CREATE TABLE IF NOT EXISTS PriceHistory (
-			Address TEXT, 
-			Time INTEGER, 
+			Address TEXT,
+			Time INTEGER,
 			PricePerPixel STRING
 		)
 	`)
@@ -112,12 +113,12 @@ func InsertPriceHistory(x model.Orchestrator) {
 }
 
 // Fetching orchestrator statistics
-func FetchOrchestratorStatistics(excludeUnavailable bool) []model.DBOrchestrator {
-
+func FetchOrchestratorStatistics(excludeUnavailable bool) ([]model.DBOrchestrator, error) {
 	rows, err := sqldb.Query("SELECT * FROM Orchestrators")
 	if err != nil {
-		log.Errorln("Error in fetching orchestrator statistics")
-		log.Errorln(err.Error())
+		return nil, err
+	} else if rows == nil {
+		return nil, errors.New("nil rows returned by sql query")
 	}
 	orchestrators := []model.DBOrchestrator{}
 	x := model.DBOrchestrator{}
@@ -128,7 +129,7 @@ func FetchOrchestratorStatistics(excludeUnavailable bool) []model.DBOrchestrator
 		}
 		orchestrators = append(orchestrators, x)
 	}
-	return orchestrators
+	return orchestrators, nil
 }
 
 // Fetcing pricing history

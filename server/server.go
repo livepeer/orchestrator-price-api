@@ -75,7 +75,16 @@ func GetOrchestratorStats(w http.ResponseWriter, req *http.Request) {
 		excludeUnavailable = true
 	}
 
-	dborchs := dataservice.FetchOrchestratorStatistics(excludeUnavailable)
+	dborchs, err := dataservice.FetchOrchestratorStatistics(excludeUnavailable)
+	if err != nil {
+		log.Errorln("Error fetching orchestrator statistics:", err.Error())
+
+		errResp := map[string]interface{}{"errors": []string{err.Error()}}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(errResp)
+		return
+	}
 	data := []model.APIOrchestrator{}
 	for _, x := range dborchs {
 		data = append(data, reformatOrchestrator(x))
