@@ -32,7 +32,7 @@ jobs:
           TAGS: ${{ steps.tags.outputs.tags }}
         run: |
           for TAG in $TAGS; do
-            docker push livepeer/mist-api-connector:$TAG
+            docker push livepeer/pricing-api:$TAG
           done
 
       - name: notify livepeer-infra
